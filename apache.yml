@@ -1,0 +1,25 @@
+---
+- name: Install and configure Apache Web Server
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Deploy index.html
+      copy:
+        content: |
+          Apache deployed using Ansible
+          Controller: node3
+          Managed node: node4
+        dest: /var/www/html/index.html
+
