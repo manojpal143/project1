@@ -1,0 +1,20 @@
+---
+- name: Install Java for Jenkins
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Install Java 17 OpenJDK
+      yum:
+        name: java-17-openjdk
+        state: present
+
+    - name: Verify Java installation
+      command: java -version
+      register: java_output
+      changed_when: false
+
+    - name: Show Java version
+      debug:
+        var: java_output.stderr
+
