@@ -4,22 +4,22 @@
   become: yes
 
   tasks:
-    - name: Install httpd package
+    - name: Install httpd
       yum:
         name: httpd
         state: present
 
-    - name: Start and enable httpd service
+    - name: Start and enable httpd
       service:
         name: httpd
         state: started
         enabled: yes
 
-    - name: Deploy index.html
+    - name: Create index.html
       copy:
         content: |
-          Apache deployed using Ansible
-          Controller: node3
-          Managed node: node4
+          Apache deployed using Jenkins + Ansible
+          Node: node4
         dest: /var/www/html/index.html
+
 
